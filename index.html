@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="logo.png">
+<title data-en="Meshal Aldawas — Junior Developer">مشعل الدواس — مبرمج مبتدئ</title>
+
+<meta name="description" content="مشعل الدواس — مبرمج مبتدئ من الرياض، يبني أساسه في تطوير الويب. شاهد مساره التعليمي، مهاراته، مشاريعه، وأكثر من 50 شهادة تدريبية.">
+<meta name="author" content="Meshal Aldawas">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="مشعل الدواس — مبرمج مبتدئ">
+<meta property="og:description" content="مبرمج مبتدئ من الرياض يبني أساسه في تطوير الويب — المسار، المهارات، المشاريع، وأكثر من 50 شهادة تدريبية.">
+<meta property="og:image" content="og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ar_SA">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="مشعل الدواس — مبرمج مبتدئ">
+<meta name="twitter:description" content="مبرمج مبتدئ من الرياض يبني أساسه في تطوير الويب — المسار، المهارات، المشاريع، وأكثر من 50 شهادة تدريبية.">
+<meta name="twitter:image" content="og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="music-control" id="music-control">
+  <button type="button" id="music-toggle" class="music-toggle" aria-label="إيقاف الموسيقى الخلفية" aria-pressed="true">
+    <span class="eq" aria-hidden="true"><span></span><span></span><span></span></span>
+  </button>
+  <input type="range" id="music-volume" class="music-volume" min="0" max="100" value="50" aria-label="مستوى صوت الموسيقى">
+</div>
+<audio id="bg-music" src="background-music.mp3" loop preload="auto"></audio>
+
+<button type="button" id="lang-toggle" class="lang-toggle" aria-label="Switch to English">EN</button>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="tick-row" aria-hidden="true">
+      <div class="tick"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div>
+      <div class="tick"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div>
+      <div class="tick"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div>
+    </div>
+
+    <span class="role-tag" data-en="Junior Developer · Building My Foundations">مبرمج مبتدئ · في طور البناء</span>
+    <h1 data-en="Meshal Aldawas">مشعل الدواس</h1>
+    <p class="lede" data-en="Building my programming foundations step by step — I started with a Computer &amp; Internet diploma, went through a hands-on programming internship, and now I'm expanding my skills in web interfaces and APIs. This page documents my current path and what I'm learning.">
+      أبني أساسي في البرمجة خطوة بخطوة — بدأت من دبلوم الكمبيوتر والإنترنت، ومررت بتدريب ميداني في تطوير التطبيقات،
+      والآن أوسّع مهاراتي في بناء واجهات الويب وواجهات برمجة التطبيقات. هذه الصفحة توثّق مساري الحالي وما أتعلمه.
+    </p>
+
+    <div class="coords">
+      <div class="coord"><span class="k">LOCATION</span><span class="v" data-en="Riyadh, Saudi Arabia">الرياض، المملكة العربية السعودية</span></div>
+      <div class="coord"><span class="k">FOCUS</span><span class="v" data-en="Web Development (Back-end / Front-end Foundations)">تطوير الويب (Back-end / Front-end أساسيات)</span></div>
+      <div class="coord"><span class="k">STATUS</span><span class="v" data-en="Learning and looking for a first opportunity">أتعلّم وأبحث عن فرصة أولى</span></div>
+    </div>
+
+    <a class="cv-download" href="meshal-aldawas-cv.pdf" download>
+      <span data-en="Download CV (PDF)">تحميل السيرة الذاتية (CV)</span>
+      <span class="cv-download-icon" aria-hidden="true">↓</span>
+    </a>
+  </header>
+
+  <section id="path">
+    <div class="sec-head">
+      <h2 data-en="Path">المسار</h2>
+      <span class="idx">01 / PATH</span>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-year" data-en="2020 – 2023">2020 – 2023</span>
+        <h3 data-en="Diploma — Computer &amp; Internet">دبلوم متوسط — الكمبيوتر والإنترنت</h3>
+        <p data-en="Technical and Vocational Training Corporation. Computer science foundations, Java programming, databases, and technical drawing.">المؤسسة العامة للتدريب التقني والمهني. أساسيات علوم الحاسوب، برمجة جافا، قواعد البيانات، والرسوم التقنية.</p>
+      </div>
+
+      <div class="tl-item">
+        <span class="tl-year" data-en="Dec 2022 – Feb 2023">ديسمبر 2022 – فبراير 2023</span>
+        <h3 data-en="Programming Trainee">متدرب برمجة</h3>
+        <p data-en="Thadiq Governorate Municipality. Java programming, schematic design, and gathering user requirements to improve internal applications.">بلدية منطقة ثادق. برمجة بلغة جافا، تصميم رسم تخطيطي، وجمع متطلبات المستخدمين لتحسين التطبيقات الداخلية.</p>
+      </div>
+
+      <div class="tl-item">
+        <span class="tl-year" data-en="2025">2025</span>
+        <h3 data-en="Professional &amp; Personal Development">تأهيل مهني وشخصي</h3>
+        <p data-en="Courses from the Human Resources Development Fund: CV writing, self-marketing and personal branding, soft skills, and finding your passion.">دورات من صندوق تنمية الموارد البشرية: إعداد السيرة الذاتية، تسويق الذات وبناء الهوية، المهارات الناعمة، وصناعة الشغف.</p>
+      </div>
+
+      <div class="tl-item active">
+        <span class="tl-year" data-en="2026 — Present">2026 — الآن</span>
+        <h3 data-en="Deepening Web Development Tools">تعميق أدوات تطوير الويب</h3>
+        <p data-en="Building RESTful interfaces with Node.js and Express, ASP.NET Core and Angular applications, accessible interface design, and building APIs with TypeSpec.">بناء واجهات RESTful بـ Node.js وExpress، تطبيقات ASP.NET Core وAngular، تصميم واجهات قابلة للوصول، وواجهات برمجة تطبيقات باستخدام TypeSpec.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="now">
+    <div class="sec-head">
+      <h2 data-en="Currently Learning">أتعلمه حالياً</h2>
+      <span class="idx">02 / NOW</span>
+    </div>
+
+    <div class="now-card">
+      <span class="now-badge" data-en="IN PROGRESS">قيد الدراسة</span>
+      <h3 data-en="Bachelor's Degree — Computer Science &amp; Information Systems">بكالوريوس — علوم الحاسب والمعلومات</h3>
+      <p class="now-meta">
+        <span data-en="Gulf Colleges">كليات الخليج</span>
+        <span class="sep" aria-hidden="true">·</span>
+        <span data-en="Track: Computer Science">المسار: علوم الحاسب</span>
+      </p>
+      <span class="now-id mono">ID 4481637</span>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head">
+      <h2 data-en="Technical Skills">المهارات التقنية</h2>
+      <span class="idx">03 / STACK</span>
+    </div>
+
+    <div class="skill-grid">
+      <div class="skill-box">
+        <h3>LANGUAGES</h3>
+        <div class="chip-row">
+          <span class="chip core">JavaScript</span>
+          <span class="chip">Java</span>
+          <span class="chip">C#</span>
+          <span class="chip">Python</span>
+          <span class="chip">C++</span>
+          <span class="chip">PHP</span>
+        </div>
+      </div>
+      <div class="skill-box">
+        <h3>FRAMEWORKS &amp; TOOLS</h3>
+        <div class="chip-row">
+          <span class="chip core">Node.js</span>
+          <span class="chip core">Express</span>
+          <span class="chip">ASP.NET Core</span>
+          <span class="chip">Angular</span>
+          <span class="chip">TypeSpec</span>
+          <span class="chip">ASP.NET Core Identity</span>
+          <span class="chip">Git</span>
+          <span class="chip">GitHub</span>
+        </div>
+      </div>
+      <div class="skill-box">
+        <h3>WEB &amp; DESIGN</h3>
+        <div class="chip-row">
+          <span class="chip">CSS (Grid / Flexbox)</span>
+          <span class="chip" data-en="Responsive Design">تصميم متجاوب (Responsive)</span>
+          <span class="chip" data-en="Accessibility">إمكانية الوصول (Accessibility)</span>
+          <span class="chip">DOM</span>
+          <span class="chip" data-en="API Documentation">توثيق APIs</span>
+          <span class="chip">GraphQL</span>
+          <span class="chip">Adobe Portfolio</span>
+        </div>
+      </div>
+      <div class="skill-box">
+        <h3>DATA</h3>
+        <div class="chip-row">
+          <span class="chip" data-en="Database Design">تصميم قواعد البيانات</span>
+          <span class="chip">Data Analytics</span>
+          <span class="chip">Data Visualization</span>
+          <span class="chip">Excel (VBA / Power Automate)</span>
+        </div>
+      </div>
+      <div class="skill-box">
+        <h3>PRACTICE</h3>
+        <div class="chip-row">
+          <span class="chip" data-en="Problem Solving">حل المشكلات</span>
+          <span class="chip" data-en="Requirements Gathering">جمع متطلبات العملاء</span>
+          <span class="chip" data-en="Teamwork">العمل ضمن فريق</span>
+          <span class="chip" data-en="Small Project Management">إدارة المشاريع الصغيرة</span>
+          <span class="chip" data-en="Product Management">إدارة المنتجات (Product Management)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head">
+      <h2 data-en="Experience">الخبرة</h2>
+      <span class="idx">04 / EXPERIENCE</span>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <h3 data-en="Programming Trainee">متدرب برمجة</h3>
+        <span class="dur" data-en="12.2022 – 02.2023">12.2022 – 02.2023</span>
+      </div>
+      <span class="place" data-en="Thadiq Governorate Municipality — Thadiq, Saudi Arabia">بلدية منطقة ثادق — ثادق، المملكة العربية السعودية</span>
+      <p class="desc" data-en="Java programming, using technical drawing software, schematic design, and gathering client feedback to improve applications.">
+        برمجة بلغة جافا، استخدام برامج الرسم التقني، تصميم رسم تخطيطي، وتجميع تعقيبات العملاء لتحسين التطبيقات.
+      </p>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <h3 data-en="Customer Service Staff">عامل خدمة عملاء</h3>
+        <span class="dur" data-en="08.2022 – 09.2022">08.2022 – 09.2022</span>
+      </div>
+      <span class="place" data-en="Riyadh International Foods Company — Riyadh">شركة الرياض العالمية للأغذية — الرياض</span>
+      <p class="desc" data-en="Teamwork, customer interaction, and commitment to safety and quality standards — hands-on experience that sharpened discipline and communication.">
+        العمل ضمن فريق، التعامل مع العملاء، والالتزام بمعايير السلامة والجودة — خبرة عملية صقلت الانضباط والتواصل.
+      </p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head">
+      <h2 data-en="Projects">مشاريعي</h2>
+      <span class="idx">05 / PROJECTS</span>
+    </div>
+
+    <div class="project-grid">
+      <a class="project-card" href="https://github.com/C9MX1188/RIEDER-FiveM-server-website-" target="_blank" rel="noopener">
+        <span class="project-lang" data-lang="html">HTML</span>
+        <h3 data-en="RIEDER FiveM Server — Website">موقع سيرفر RIEDER FiveM</h3>
+        <span class="project-repo mono">RIEDER-FiveM-server-website-</span>
+      </a>
+
+      <a class="project-card" href="https://github.com/C9MX1188/Site-for-Lee-Server-x3f6-FiveM" target="_blank" rel="noopener">
+        <span class="project-lang" data-lang="html">HTML</span>
+        <h3 data-en="Site for Lee Server FiveM">موقع سيرفر x3f6 FiveM</h3>
+        <span class="project-repo mono">Site-for-Lee-Server-x3f6-FiveM</span>
+      </a>
+
+      <a class="project-card" href="https://github.com/C9MX1188/page-for-an-AI-powered-transport-service-designed-to-inform" target="_blank" rel="noopener">
+        <span class="project-lang" data-lang="css">CSS</span>
+        <h3 data-en="Info Page for an AI-Powered Transport Service">صفحة تعريفية لخدمة نقل مدعومة بالذكاء الاصطناعي</h3>
+        <span class="project-repo mono">page-for-an-AI-powered-transport-service</span>
+      </a>
+
+      <a class="project-card" href="https://github.com/C9MX1188/-Wish-Tabi-Bas-Website-Project-1.0" target="_blank" rel="noopener">
+        <span class="project-lang" data-lang="css">CSS</span>
+        <h3 data-en="Wish Tabi Bas — Website Project">موقع Wish Tabi Bas</h3>
+        <span class="project-repo mono">Wish-Tabi-Bas-Website-Project-1.0</span>
+      </a>
+    </div>
+
+    <a class="all-repos-link" href="https://github.com/C9MX1188?tab=repositories" target="_blank" rel="noopener">
+      <span data-en="View all repositories on GitHub">عرض كل المستودعات على GitHub</span> →
+    </a>
+  </section>
+
+  <section id="certificates">
+    <div class="sec-head">
+      <h2 data-en="Certificates">الشهادات</h2>
+      <span class="idx">06 / CERTIFICATES</span>
+    </div>
+
+    <button type="button" id="toggle-all-certs" class="toggle-all-btn" data-state="collapsed" data-ar-expand="توسيع الكل" data-ar-collapse="طي الكل" data-en-expand="Expand all" data-en-collapse="Collapse all">توسيع الكل</button>
+
+    <details class="cert-group" open>
+      <summary><span data-en="Web Development">تطوير الويب</span><span class="count mono">25</span></summary>
+      <div class="cert-list">
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Introduction to Web Design and Development</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 54m">ساعة و54 دقيقة</span>
+            <span class="date mono">2026-02-06</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>HTML, CSS, and JavaScript: Building the Web</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="3h 37m">3 ساعات و37 دقيقة</span>
+            <span class="date mono">2026-02-06</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Careers in Web Design and Development</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="27m">27 دقيقة</span>
+            <span class="date mono">2026-02-08</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Creating a Responsive Web Design: Advanced Techniques</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 14m">ساعة و14 دقيقة</span>
+            <span class="date mono">2026-02-08</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Simplifying Web Development with Accessibility Best Practices</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 48m">ساعة و48 دقيقة</span>
+            <span class="date mono">2026-02-08</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Programming Foundations: Version Control with Git</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 56m">ساعة و56 دقيقة</span>
+            <span class="date mono">2026-02-08</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>CSS: Advanced Layouts with Grid</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="2h 28m">ساعتان و28 دقيقة</span>
+            <span class="date mono">2026-02-08</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>JavaScript Essential Training</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="6h 14m">6 ساعات و14 دقيقة</span>
+            <span class="date mono">2026-02-08</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>CSS Fundamentals: Unlock the Power of Web Styling</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 30m">ساعة و30 دقيقة</span>
+            <span class="date mono">2026-02-11</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>CSS Layouts: From Float to Flexbox and Grid</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 44m">ساعة و44 دقيقة</span>
+            <span class="date mono">2026-02-11</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Creating a Responsive Web Experience</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 23m">ساعة و23 دقيقة</span>
+            <span class="date mono">2026-02-11</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Accessibility for Web Design</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 58m">ساعة و58 دقيقة</span>
+            <span class="date mono">2026-02-12</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>JavaScript: Enhancing the DOM</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="2h 35m">ساعتان و35 دقيقة</span>
+            <span class="date mono">2026-02-12</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Complete Guide to Git</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="7h 38m">7 ساعات و38 دقيقة</span>
+            <span class="date mono">2026-02-17</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Building RESTful APIs with Node.js and Express</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 17m">ساعة و17 دقيقة</span>
+            <span class="date mono">2026-02-17</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Express Essentials: Build Powerful Web Apps with Node.js</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 59m">ساعة و59 دقيقة</span>
+            <span class="date mono">2026-02-17</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Getting Started as a Full-Stack Web Developer</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="3h 37m">3 ساعات و37 دقيقة</span>
+            <span class="date mono">2026-02-17</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Building Angular and ASP.NET Core Applications</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="2h 56m">ساعتان و56 دقيقة</span>
+            <span class="date mono">2026-02-18</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>ASP.NET Core Identity: Authorization Management</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 37m">ساعة و37 دقيقة</span>
+            <span class="date mono">2026-02-18</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Creating API Documentation</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="30m">30 دقيقة</span>
+            <span class="date mono">2026-02-22</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Programming Foundations: APIs and Web Services</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 55m">ساعة و55 دقيقة</span>
+            <span class="date mono">2026-02-23</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>API Development with TypeSpec</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="55m">55 دقيقة</span>
+            <span class="date mono">2026-02-24</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Building a Portfolio with Adobe Portfolio</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="2h 3m">ساعتان و3 دقائق</span>
+            <span class="date mono">2026-02-10</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>GitHub Issues and Projects for Teams</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 10m">ساعة و10 دقائق</span>
+            <span class="date mono">2026-02-28</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Practical GitHub Project Management and Collaboration</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 19m">ساعة و19 دقيقة</span>
+            <span class="date mono">2026-03-11</span>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="cert-group">
+      <summary><span data-en="Data Analysis">تحليل البيانات</span><span class="count mono">8</span></summary>
+      <div class="cert-list">
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Learning Data Analytics: 1 Foundations</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="3h 29m">3 ساعات و29 دقيقة</span>
+            <span class="date mono">2026-02-20</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Learning Data Analytics Part 2: Extending and Applying Core Knowledge</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="3h 22m">3 ساعات و22 دقيقة</span>
+            <span class="date mono">2026-02-20</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Data Analytics for Business Professionals</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 20m">ساعة و20 دقيقة</span>
+            <span class="date mono">2026-02-24</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Database Foundations: Intro to Databases</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="3h 51m">3 ساعات و51 دقيقة</span>
+            <span class="date mono">2026-02-19</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Introduction to Career Skills in Data Analytics</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="2h 21m">ساعتان و21 دقيقة</span>
+            <span class="date mono">2026-02-20</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Data Visualization for Data Analysts and Analytics</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 44m">ساعة و44 دقيقة</span>
+            <span class="date mono">2026-02-28</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Career Essentials in Data Analysis by Microsoft and LinkedIn</h3>
+            <span class="issuer">LinkedIn Learning · Microsoft</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="12h 18m">12 ساعة و18 دقيقة</span>
+            <span class="date mono">2026-02-28</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Data Visualization Tips and Tricks</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="2h 14m">ساعتان و14 دقيقة</span>
+            <span class="date mono">2026-03-05</span>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="cert-group">
+      <summary><span data-en="Programming Languages">لغات البرمجة</span><span class="count mono">1</span></summary>
+      <div class="cert-list">
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>C++ Development: Advanced Concepts, Lambda Expressions, and Best Practices</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="2h 54m">ساعتان و54 دقيقة</span>
+            <span class="date mono">2026-02-18</span>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="cert-group">
+      <summary><span data-en="Product Management">إدارة المنتجات</span><span class="count mono">3</span></summary>
+      <div class="cert-list">
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Product Management First Steps</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 36m">ساعة و36 دقيقة</span>
+            <span class="date mono">2026-03-11</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Product Management: Building a Product Strategy</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 5m">ساعة و5 دقائق</span>
+            <span class="date mono">2026-03-11</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Product Innovation for Product Managers</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 9m">ساعة و9 دقائق</span>
+            <span class="date mono">2026-03-12</span>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="cert-group">
+      <summary><span data-en="Team Collaboration">العمل الجماعي</span><span class="count mono">1</span></summary>
+      <div class="cert-list">
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Effective Collaboration across Teams</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="45m">45 دقيقة</span>
+            <span class="date mono">2026-02-20</span>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="cert-group">
+      <summary><span data-en="Excel &amp; Office Automation">Excel وأتمتة المكاتب</span><span class="count mono">7</span></summary>
+      <div class="cert-list">
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Excel 2016: Advanced Formulas and Functions</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="6h 18m">6 ساعات و18 دقيقة</span>
+            <span class="date mono">2026-02-28</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Miss Excel's Top Productivity Hacks</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 7m">ساعة و7 دقائق</span>
+            <span class="date mono">2026-02-24</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Learning Excel: Data Analysis</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="3h 41m">3 ساعات و41 دقيقة</span>
+            <span class="date mono">2026-03-04</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Excel VBA: Process Modeling</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="3h 2m">3 ساعات ودقيقتان</span>
+            <span class="date mono">2026-03-04</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Excel: Automating Tasks with Power Automate</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h 34m">ساعة و34 دقيقة</span>
+            <span class="date mono">2026-03-05</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Excel: Charts in Depth</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="2h 36m">ساعتان و36 دقيقة</span>
+            <span class="date mono">2026-03-07</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3>Excel Data Visualization: Designing Custom Visualizations</h3>
+            <span class="issuer">LinkedIn Learning</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="2h 3m">ساعتان و3 دقائق</span>
+            <span class="date mono">2026-03-11</span>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="cert-group">
+      <summary><span data-en="Professional Development — HRDF / Doroob">التأهيل المهني — HRDF / دروب</span><span class="count mono">8</span></summary>
+      <div class="cert-list">
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3 data-en="Computer Basics">أساسيات الحاسب الآلي</h3>
+            <span class="issuer" data-en="Human Resources Development Fund (HRDF)">صندوق تنمية الموارد البشرية</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="3h">3 ساعات</span>
+            <span class="date mono">2026-06-28</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3 data-en="Career Development">تنمية الفرص الوظيفية</h3>
+            <span class="issuer" data-en="Doroob">دروب</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h">ساعة واحدة</span>
+            <span class="date mono">2026-05-30</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3 data-en="Job Searching">البحث عن وظيفة</h3>
+            <span class="issuer" data-en="Human Resources Development Fund (HRDF)">صندوق تنمية الموارد البشرية</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="3h">3 ساعات</span>
+            <span class="date mono">2026-06-23</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3 data-en="Passing Job Interviews Successfully">اجتياز المقابلة الوظيفية بنجاح</h3>
+            <span class="issuer" data-en="Doroob">دروب</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="1h">ساعة واحدة</span>
+            <span class="date mono">2026-05-30</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3 data-en="Labor Culture According to Saudi Labor Law">الثقافة العمالية وفق نظام العمل السعودي</h3>
+            <span class="issuer" data-en="Doroob">دروب</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="2h">ساعتان</span>
+            <span class="date mono">2026-05-31</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3 data-en="Professional Job Interviewing">المقابلة الشخصية الاحترافية</h3>
+            <span class="issuer" data-en="Human Resources Development Fund (HRDF)">صندوق تنمية الموارد البشرية</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="3h">3 ساعات</span>
+            <span class="date mono">2026-06-26</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3 data-en="Outlook Program">برنامج Outlook</h3>
+            <span class="issuer" data-en="Human Resources Development Fund (HRDF)">صندوق تنمية الموارد البشرية</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="2h">ساعتان</span>
+            <span class="date mono">2026-06-28</span>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-main">
+            <h3 data-en="Business Events Experience Design and Management">تصميم وإدارة التجارب في فعاليات الأعمال</h3>
+            <span class="issuer" data-en="Human Resources Development Fund (HRDF)">صندوق تنمية الموارد البشرية</span>
+          </div>
+          <div class="cert-meta">
+            <span class="dur" data-en="2h">ساعتان</span>
+            <span class="date mono">2026-06-23</span>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section id="behind-the-page">
+    <div class="sec-head">
+      <h2 data-en="Behind This Page">خلف هذه الصفحة</h2>
+      <span class="idx">07 / BUILD NOTES</span>
+    </div>
+
+    <div class="skill-grid">
+      <div class="skill-box">
+        <h3>BUILT WITH</h3>
+        <div class="chip-row">
+          <span class="chip core">HTML</span>
+          <span class="chip core">CSS</span>
+          <span class="chip core">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-box">
+        <h3>DESIGN CONCEPT</h3>
+        <p class="build-note" data-en="This design isn't copied from any specific site — the concept is a &quot;Blueprint&quot; look inspired by my technical drawing background from my diploma: a background grid, measurement lines, and colors that echo blueprint paper.">
+          التصميم مو منسوخ من موقع معيّن — الفكرة أسلوب "مخطط هندسي" (Blueprint)
+          مستوحى من خلفيتي في الرسوم التقنية بالدبلوم: شبكة خلفية، خطوط قياس،
+          وألوان تشبه ورق المخططات الزرقاء.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <span class="idx">08 / CONTACT</span>
+    <h2 style="margin-top:14px;" data-en="Looking for my first opportunity in programming">أبحث عن فرصة أولى في البرمجة</h2>
+    <p style="color:var(--paper-dim); max-width:56ch; margin-bottom:32px;" data-en="Excited to join a team where I can keep learning and contribute what I know so far. Reach me via:">
+      متحمس للانضمام إلى فريق أتعلّم فيه وأساهم بما أعرفه حتى الآن. تواصل معي عبر:
+    </p>
+
+    <div class="contact-grid">
+      <div class="contact-item email">
+        <span class="k">EMAIL</span>
+        <a class="v" href="mailto:meshaldwas1423@gmail.com">meshaldwas1423@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <span class="k">PHONE</span>
+        <span class="v mono">+966 54 699 2912</span>
+      </div>
+      <div class="contact-item loc">
+        <span class="k">LOCATION</span>
+        <span class="v" data-en="Riyadh, Saudi Arabia">الرياض، المملكة العربية السعودية</span>
+      </div>
+      <div class="contact-item">
+        <span class="k">GITHUB</span>
+        <a class="v mono" href="https://github.com/C9MX1188" target="_blank" rel="noopener">github.com/C9MX1188</a>
+      </div>
+      <div class="contact-item">
+        <span class="k">LINKEDIN</span>
+        <a class="v" href="https://www.linkedin.com/in/مشعل-الدواس-6102771b5/" target="_blank" rel="noopener" data-en="LinkedIn">لينكدإن</a>
+      </div>
+    </div>
+
+    <p class="foot-note">M.ALDAWAS — BUILDING IN PUBLIC — 2026</p>
+  </footer>
+
+</div>
+
+<script src="interactions.js"></script>
+</body>
+</html>
