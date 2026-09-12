@@ -1,14 +1,3 @@
-/*
-  interactions.js
-  ----------------
-  ملف JavaScript (وليس Java — جافا لا تعمل داخل المتصفح) يضيف عدة تأثيرات لصفحة مشعل الدواس:
-  1) ظهور تدريجي لكل قسم عند التمرير إليه (Scroll reveal).
-  2) تأثير "نبضة قياس" عند لمس/الضغط على مربعات المهارات (chips).
-  3) فتح/إغلاق سلس لمجموعات الشهادات (details/summary) بدل القفزة الفجائية الافتراضية.
-  4) زر "توسيع الكل / طي الكل" للتحكم بكل مجموعات الشهادات دفعة وحدة.
-  يحترم إعداد تقليل الحركة في نظام المستخدم (prefers-reduced-motion) في كل تأثير.
-*/
-
 document.addEventListener('DOMContentLoaded', () => {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
