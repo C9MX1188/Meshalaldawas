@@ -751,6 +751,20 @@ footer h2{
   color: var(--line);
   font-size:0.8rem;
   font-family:'IBM Plex Mono', monospace;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:14px;
+}
+.visit-counter{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color: var(--line);
+}
+.visit-counter img{
+  vertical-align:middle;
+  filter: invert(0.6) sepia(1) saturate(2) hue-rotate(150deg);
 }
 
 @media (max-width:640px){
