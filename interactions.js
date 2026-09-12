@@ -223,9 +223,13 @@ document.addEventListener('DOMContentLoaded', () => {
   /* 6) تبديل اللغة (عربي / إنجليزي) */
   const langBtn = document.getElementById('lang-toggle');
   const translatable = document.querySelectorAll('[data-en]');
+  const placeholderEls = document.querySelectorAll('[data-en-placeholder]');
 
   translatable.forEach((el) => {
     el.dataset.ar = el.innerHTML;
+  });
+  placeholderEls.forEach((el) => {
+    el.dataset.arPlaceholder = el.getAttribute('placeholder');
   });
 
   function setLang(lang) {
@@ -235,6 +239,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     translatable.forEach((el) => {
       el.innerHTML = lang === 'ar' ? el.dataset.ar : el.dataset.en;
+    });
+
+    placeholderEls.forEach((el) => {
+      el.setAttribute(
+        'placeholder',
+        lang === 'ar' ? el.dataset.arPlaceholder : el.dataset.enPlaceholder
+      );
     });
 
     if (langBtn) {
@@ -257,5 +268,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const savedLang = localStorage.getItem('site-lang');
     if (savedLang === 'en') setLang('en');
+  }
+
+  /* 7) نموذج التواصل (Formspree) */
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    const statusEl = contactForm.querySelector('.form-status');
+    const submitBtn = contactForm.querySelector('.form-submit');
+
+    const statusText = {
+      sending: { ar: 'جاري الإرسال...', en: 'Sending...' },
+      success: { ar: 'تم إرسال رسالتك بنجاح، بترد عليك قريباً!', en: 'Message sent successfully — I will reply soon!' },
+      error: { ar: 'صار خطأ، حاول مرة ثانية أو راسلني على الإيميل مباشرة.', en: 'Something went wrong — please try again or email me directly.' },
+    };
+
+    const currentLang = () => (document.documentElement.lang === 'en' ? 'en' : 'ar');
+
+    contactForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const lang = currentLang();
+      submitBtn.disabled = true;
+      statusEl.textContent = statusText.sending[lang];
+      statusEl.className = 'form-status';
+
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { Accept: 'application/json' },
+        });
+
+        if (response.ok) {
+          statusEl.textContent = statusText.success[lang];
+          statusEl.className = 'form-status success';
+          contactForm.reset();
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (err) {
+        statusEl.textContent = statusText.error[lang];
+        statusEl.className = 'form-status error';
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
   }
 });
