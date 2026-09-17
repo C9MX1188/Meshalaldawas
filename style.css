@@ -10,6 +10,7 @@
   --amber-dim: rgba(232,163,61,0.35);
   --teal: #6fd7c5;
   --radius: 3px;
+  color-scheme: dark;
 }
 
 *{ box-sizing:border-box; margin:0; padding:0; }
@@ -71,7 +72,7 @@ body{
 .lang-toggle:hover{ border-color: var(--teal); color: var(--teal); transform: scale(1.04); }
 .lang-toggle:active{ transform: scale(0.95); }
 
-body.lang-en{ font-family: 'IBM Plex Sans Arabic', 'Segoe UI', system-ui, sans-serif; }
+/* استُبدل هذا السطر بقاعدة html.lang-en في نهاية الملف (خط لاتيني أولاً عند الإنجليزية) */
 
 .music-control:has(.music-toggle.playing){
   border-color: rgba(232,163,61,0.55);
@@ -401,13 +402,15 @@ section:last-of-type{ border-bottom:none; }
 }
 .chip{
   position:relative;
-  overflow:hidden;
+  /* كان overflow:hidden يقصّ نبضة القياس (.chip-ping) فلا تُرى — أُزيل */
   border:1px solid var(--grid-strong);
   padding: 5px 12px;
   font-size:0.88rem;
   color: var(--paper);
   border-radius: var(--radius);
   cursor:pointer;
+  user-select:none;
+  -webkit-user-select:none;
   transition: border-color .25s ease, color .25s ease, transform .15s ease;
 }
 .chip.core{ border-color: var(--teal); color: var(--teal); }
@@ -779,4 +782,104 @@ footer h2{
   html{ scroll-behavior:auto; }
   .reveal{ opacity:1; transform:none; transition:none; }
   .chip-ping{ display:none; }
+}
+
+/* ============================================================
+   تحسينات وإصلاحات
+   ============================================================ */
+
+/* عند الإنجليزية: خط لاتيني أولاً ثم العربي كاحتياط */
+html.lang-en body{
+  font-family:'IBM Plex Sans', 'IBM Plex Sans Arabic', 'Segoe UI', system-ui, sans-serif;
+}
+html.lang-en .skip-link,
+html.lang-en .toggle-all-btn,
+html.lang-en .contact-form input,
+html.lang-en .contact-form textarea{ font-family:'IBM Plex Sans', 'IBM Plex Sans Arabic', sans-serif; }
+
+::selection{ background: var(--amber); color: var(--ink); }
+
+/* رابط التخطي (يظهر فقط عند التركيز بلوحة المفاتيح) */
+.skip-link{
+  position:absolute;
+  top:12px;
+  left:50%;
+  z-index:80;
+  padding:10px 18px;
+  background: var(--amber);
+  color: var(--ink);
+  border-radius: var(--radius);
+  font-size:0.9rem;
+  font-weight:500;
+  transform: translate(-50%, -180%);
+  transition: transform .2s ease;
+}
+.skip-link:focus,
+.skip-link:focus-visible{ transform: translate(-50%, 0); }
+
+/* قابلية الوصول: حالات تركيز موحّدة لكل العناصر التفاعلية */
+.music-toggle:focus-visible,
+.music-volume:focus-visible,
+.cv-download:focus-visible,
+.project-card:focus-visible,
+.all-repos-link:focus-visible,
+.form-submit:focus-visible,
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible{
+  outline:2px solid var(--amber);
+  outline-offset:3px;
+}
+
+/* عدّاد الشهادات */
+.cert-total{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin:0 0 22px;
+  padding:7px 15px;
+  border:1px solid var(--grid-strong);
+  border-radius:999px;
+  color: var(--paper-dim);
+  font-size:0.84rem;
+}
+.cert-total strong{ color: var(--teal); font-size:0.95rem; }
+
+/* عناوين التذييل (بدل الأنماط المضمّنة داخل HTML) */
+.footer-title{ margin-top:14px; }
+.footer-lede{ color: var(--paper-dim); max-width:56ch; margin-bottom:32px; }
+
+/* إصلاح محاذاة قيم بطاقات التواصل: كانت بعضها يميناً وبعضها يساراً */
+.contact-item .v{ direction:ltr; text-align:right; }
+.contact-item.email .v{ direction:ltr; text-align:right; }
+.contact-item.loc .v{ direction:rtl; text-align:right; }
+
+/* تنقّل سلس مع ترك مسافة أعلى الأقسام */
+section[id], footer[id]{ scroll-margin-top: 24px; }
+
+/* توازن أسطر العناوين */
+h1, h2, .now-card h3, .project-card h3{ text-wrap: balance; }
+
+/* ===== الجوّال: أزرار ثابتة أصغر + مساحة أعلى البطل ===== */
+@media (max-width:640px){
+  .wrap{ padding: 0 20px; }
+  .music-control{ top:12px; left:12px; padding:5px 13px 5px 5px; gap:9px; }
+  .music-toggle{ width:36px; height:36px; }
+  .music-volume{ width:64px; }
+  .lang-toggle{ top:12px; right:12px; padding:9px 14px; }
+  header.hero{ padding: 96px 0 44px; }
+}
+
+/* ===== الطباعة: تصدير الصفحة كورقة سيرة ذاتية نظيفة ===== */
+@media print{
+  :root{
+    --ink:#ffffff; --ink-2:#ffffff; --paper:#111111; --paper-dim:#333333;
+    --line:#666666; --grid-strong:#b9b9b9; --grid:transparent; --amber:#111111; --teal:#222222;
+  }
+  body{ background:#ffffff; color:#111111; }
+  .music-control, .lang-toggle, .skip-link, .tick-row,
+  .visit-counter, #toggle-all-certs, .contact-form, .all-repos-link{ display:none !important; }
+  .reveal{ opacity:1 !important; transform:none !important; }
+  section, .job, .cert-item, .now-card, .contact-item, .project-card{ page-break-inside: avoid; }
+  .cert-group .cert-list{ padding-bottom:0; }
+  a{ color:#111111; text-decoration:underline; }
 }

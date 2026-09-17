@@ -1,3 +1,14 @@
+/*
+  interactions.js
+  ----------------
+  ملف JavaScript (وليس Java — جافا لا تعمل داخل المتصفح) يضيف عدة تأثيرات لصفحة مشعل الدواس:
+  1) ظهور تدريجي لكل قسم عند التمرير إليه (Scroll reveal).
+  2) تأثير "نبضة قياس" عند لمس/الضغط على مربعات المهارات (chips).
+  3) فتح/إغلاق سلس لمجموعات الشهادات (details/summary) بدل القفزة الفجائية الافتراضية.
+  4) زر "توسيع الكل / طي الكل" للتحكم بكل مجموعات الشهادات دفعة وحدة.
+  يحترم إعداد تقليل الحركة في نظام المستخدم (prefers-reduced-motion) في كل تأثير.
+*/
+
 document.addEventListener('DOMContentLoaded', () => {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -6,6 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
   sections.forEach((el) => el.classList.add('reveal'));
 
   if (!prefersReduced && 'IntersectionObserver' in window) {
+    /* ملاحظة مهمة: كان threshold: 0.15 يخفي قسم «الشهادات» نهائياً لأن ارتفاعه
+       أكبر من الشاشة، فلا تظهر منه 15% أبداً فيبقى opacity:0 إلى الأبد.
+       الحل: threshold = 0 (أي ظهور أي جزء) + هامش سفلي بسيط. */
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -15,9 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0, rootMargin: '0px 0px -40px 0px' }
     );
     sections.forEach((el) => observer.observe(el));
+
+    /* شبكة أمان: لو صار أي خلل في المراقبة، أعرض كل الأقسام بعد 4 ثوانٍ */
+    window.setTimeout(() => {
+      sections.forEach((el) => el.classList.add('is-visible'));
+    }, 4000);
   } else {
     // لو المتصفح ما يدعم المراقبة أو المستخدم مفعّل تقليل الحركة: أظهر كل شيء فوراً
     sections.forEach((el) => el.classList.add('is-visible'));
@@ -29,9 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
   chips.forEach((chip) => {
     chip.setAttribute('tabindex', '0');
     chip.setAttribute('role', 'button');
+    chip.setAttribute('aria-pressed', 'false');
+
+    const toggleChip = () => {
+      const on = chip.classList.toggle('active');
+      chip.setAttribute('aria-pressed', on ? 'true' : 'false');
+    };
 
     chip.addEventListener('click', (event) => {
-      chip.classList.toggle('active');
+      toggleChip();
 
       if (prefersReduced) return; // بدون نبضة بصرية إذا كان تقليل الحركة مفعّلاً
 
@@ -146,8 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       toggleAllBtn.dataset.state = shouldExpand ? 'expanded' : 'collapsed';
+      toggleAllBtn.setAttribute('aria-expanded', shouldExpand ? 'true' : 'false');
       updateToggleAllLabel();
     });
+
+    toggleAllBtn.setAttribute('aria-expanded', 'false');
   }
 
   function updateToggleAllLabel() {
@@ -192,21 +220,10 @@ document.addEventListener('DOMContentLoaded', () => {
       musicBtn.setAttribute('aria-label', 'تشغيل الموسيقى الخلفية');
     });
 
-    // محاولة تشغيل تلقائي فور تحميل الصفحة
-    const tryAutoplay = () => musicAudio.play().catch(() => {});
-    tryAutoplay();
-
-    // المتصفحات تمنع التشغيل التلقائي بدون تفاعل من الزائر أحياناً،
-    // فلو فشلت المحاولة الأولى، نشغّلها عند أول تفاعل (ضغطة، تمرير، لمس)
-    const startOnFirstInteraction = () => {
-      if (musicAudio.paused) tryAutoplay();
-      ['click', 'touchstart', 'keydown', 'scroll'].forEach((evt) =>
-        document.removeEventListener(evt, startOnFirstInteraction)
-      );
-    };
-    ['click', 'touchstart', 'keydown', 'scroll'].forEach((evt) =>
-      document.addEventListener(evt, startOnFirstInteraction, { once: true, passive: true })
-    );
+    /* مهم: لا نُشغّل الموسيقى تلقائياً بعد الآن.
+       - المتصفحات تحظر التشغيل التلقائي، فكان الكود السابق يشغّلها فجأة عند أول
+         «تمرير» (scroll) — أمر مزعج وغير متوقع، ومعطّلاً لقارئ الشاشة.
+       - الآن تبدأ الموسيقى عند ضغط الزائر للزر فقط، وهذا يساوي حاجز التفاعل المطلوب. */
   }
 
   /* 6) تبديل اللغة (عربي / إنجليزي) */
@@ -246,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     updateToggleAllLabel();
-    localStorage.setItem('site-lang', lang);
+    try { localStorage.setItem('site-lang', lang); } catch (e) { /* تجاهل بهدوء */ }
   }
 
   if (langBtn) {
@@ -255,12 +272,16 @@ document.addEventListener('DOMContentLoaded', () => {
       setLang(next);
     });
 
-    const savedLang = localStorage.getItem('site-lang');
+    /* نُطبّق اللغة المحفوظة وقت التحميل (اتجاه الصفحة نفسه مُطبَّق مسبقاً في <head>
+       لتجنب اهتزاز التخطيط)، ثم نُزامن نصوص الأزرار */
+    let savedLang = null;
+    try { savedLang = localStorage.getItem('site-lang'); } catch (e) { savedLang = null; }
     if (savedLang === 'en') setLang('en');
   }
 
   /* 7) نموذج التواصل (Formspree) */
-  const contactForm = document.getElementById('contact-form');
+  /* 7) نموذج التواصل (Formspree) */
+    const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     const statusEl = contactForm.querySelector('.form-status');
     const submitBtn = contactForm.querySelector('.form-submit');
