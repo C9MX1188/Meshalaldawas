@@ -10,13 +10,15 @@
     بدون تخزين حتى لا نُقدّم بيانات قديمة أو نكسر الإرسال.
 */
 
-const CACHE_VERSION = 'meshal-v3';
+const CACHE_VERSION = 'meshal-v4';
 const CORE_ASSETS = [
   './',
   './index.html',
   './style.css',
   './interactions.js',
-  './logo.png',
+  './logo-32.png',
+  './logo-68.png',
+  './logo-256.png',
   './manifest.webmanifest',
   './offline.html',
 ];
