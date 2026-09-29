@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101c2c">
+<meta name="robots" content="noindex">
+<title>لا يوجد اتصال — مشعل الدواس</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="stylesheet" href="style.css">
+<style>
+  .offline-wrap{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    text-align: center;
+    padding: 40px 24px;
+  }
+  .offline-wrap img{ width: 88px; height: 88px; object-fit: contain; opacity: 0.9; }
+  .offline-wrap h1{ font-size: 1.6rem; max-width: none; }
+  .offline-wrap p{ color: var(--paper-dim); max-width: 44ch; }
+  .offline-code{ color: var(--line); font-size: 0.8rem; }
+</style>
+</head>
+<body>
+<main class="offline-wrap">
+  <img src="logo.png" alt="شعار مشعل الدواس" width="88" height="88">
+  <h1>لا يوجد اتصال بالإنترنت</h1>
+  <p>
+    يبدو أن جهازك غير متصل الآن. تحقّق من الاتصال ثم أعد المحاولة —
+    الصفحة الرئيسية محفوظة عندك وستفتح فور عودة الشبكة.
+  </p>
+  <p class="mono offline-code">OFFLINE — M.ALDAWAS</p>
+  <a class="cv-download" href="index.html">
+    <span>إعادة المحاولة</span>
+    <span class="cv-download-icon" aria-hidden="true">↻</span>
+  </a>
+</main>
+</body>
+</html>

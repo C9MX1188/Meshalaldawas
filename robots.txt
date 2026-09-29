@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /404.html
+Disallow: /offline.html
+
+Sitemap: https://c9mx1188.github.io/Meshalaldawas/sitemap.xml

@@ -9,14 +9,17 @@
 <meta name="format-detection" content="telephone=no">
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="apple-touch-icon" href="logo.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="مشعل الدواس">
 <title data-en="Meshal Aldawas — Junior Developer">مشعل الدواس — مبرمج مبتدئ</title>
 
-<meta name="description" content="مشعل الدواس — مبرمج مبتدئ من الرياض، يبني أساسه في تطوير الويب. شاهد مساره التعليمي، مهاراته، مشاريعه، وأكثر من 50 شهادة تدريبية.">
+<meta name="description" content="مشعل الدواس — مبرمج مبتدئ من الرياض، يبني أساسه في تطوير الويب. المسار التعليمي، المهارات بمستوياتها الفعلية، المشاريع، وـ 53 شهادة تدريبية (131 ساعة).">
 <meta name="author" content="Meshal Aldawas">
 
 <meta property="og:type" content="profile">
 <meta property="og:title" content="مشعل الدواس — مبرمج مبتدئ">
-<meta property="og:description" content="مبرمج مبتدئ من الرياض يبني أساسه في تطوير الويب — المسار، المهارات، المشاريع، وأكثر من 50 شهادة تدريبية.">
+<meta property="og:description" content="مبرمج مبتدئ من الرياض يبني أساسه في تطوير الويب — المسار، المهارات، المشاريع، وـ 53 شهادة تدريبية (131 ساعة).">
 <meta property="og:url" content="https://c9mx1188.github.io/Meshalaldawas/">
 <meta property="og:image" content="https://c9mx1188.github.io/Meshalaldawas/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -25,27 +28,35 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="مشعل الدواس — مبرمج مبتدئ">
-<meta name="twitter:description" content="مبرمج مبتدئ من الرياض يبني أساسه في تطوير الويب — المسار، المهارات، المشاريع، وأكثر من 50 شهادة تدريبية.">
+<meta name="twitter:description" content="مبرمج مبتدئ من الرياض يبني أساسه في تطوير الويب — المسار، المهارات، المشاريع، وـ 53 شهادة تدريبية (131 ساعة).">
 <meta name="twitter:image" content="https://c9mx1188.github.io/Meshalaldawas/og-image.png">
 
 <link rel="canonical" href="https://c9mx1188.github.io/Meshalaldawas/">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 
 <script>
-  /* نطبّق اللغة المحفوظة قبل رسم الصفحة حتى لا يهتزّ اتجاه الصفحة (FOUC / direction shift).
+  /* نطبّق اللغة والثيم المحفوظين قبل رسم الصفحة حتى لا يهتزّ الاتجاه أو تومض الألوان (FOUC).
      استبدال النصوص نفسه يتم في interactions.js بعد بناء DOM. */
   (function () {
+    var root = document.documentElement;
     try {
       if (localStorage.getItem('site-lang') === 'en') {
-        document.documentElement.lang = 'en';
-        document.documentElement.dir = 'ltr';
-        document.documentElement.classList.add('lang-en');
+        root.lang = 'en';
+        root.dir = 'ltr';
+        root.classList.add('lang-en');
       }
     } catch (e) { /* localStorage معطّل — نتجاهل بهدوء */ }
+    try {
+      var t = localStorage.getItem('site-theme');
+      if (!t) t = 'dark';
+      root.dataset.theme = t;
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', t === 'light' ? '#f4f7fb' : '#101c2c');
+    } catch (e) { root.dataset.theme = 'dark'; }
   })();
 </script>
 
@@ -76,20 +87,52 @@
 </head>
 <body>
 
-<a class="skip-link" href="#main">تخطَّ إلى المحتوى الرئيسي</a>
+<a class="skip-link" href="#main" data-en="Skip to main content">تخطَّ إلى المحتوى الرئيسي</a>
 
-<div class="music-control" id="music-control">
-  <button type="button" id="music-toggle" class="music-toggle" aria-label="تشغيل الموسيقى الخلفية" aria-pressed="false">
-    <span class="eq" aria-hidden="true"><span></span><span></span><span></span></span>
-  </button>
-  <input type="range" id="music-volume" class="music-volume" min="0" max="100" value="35"
-         aria-label="مستوى صوت الموسيقى" data-en-aria="Music volume">
-</div>
-<audio id="bg-music" src="background-music.mp3" loop preload="metadata" playsinline></audio>
+<div class="scroll-progress" id="scroll-progress" role="presentation"><span></span></div>
 
-<button type="button" id="lang-toggle" class="lang-toggle" aria-label="Switch to English">EN</button>
+<nav class="site-nav" id="site-nav" aria-label="التنقل الرئيسي" data-en-aria="Main navigation">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#main">
+      <img src="logo.png" alt="" width="34" height="34" decoding="async" fetchpriority="low">
+      <span class="nav-brand-text" data-en="M. ALDAWAS">م. الدواس</span>
+    </a>
 
-<div class="wrap" id="main">
+    <button type="button" class="nav-burger" id="nav-burger" aria-expanded="false" aria-controls="nav-links"
+            aria-label="فتح القائمة" data-en-aria="Open menu">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#path" data-en="Path">المسار</a></li>
+      <li><a href="#now" data-en="Now">الآن</a></li>
+      <li><a href="#skills" data-en="Skills">المهارات</a></li>
+      <li><a href="#experience" data-en="Experience">الخبرة</a></li>
+      <li><a href="#projects" data-en="Projects">المشاريع</a></li>
+      <li><a href="#certificates" data-en="Certificates">الشهادات</a></li>
+      <li><a href="#contact" data-en="Contact">تواصل</a></li>
+    </ul>
+
+    <div class="nav-tools">
+      <div class="music-control" id="music-control">
+        <button type="button" id="music-toggle" class="music-toggle" aria-label="تشغيل الموسيقى الخلفية" aria-pressed="false">
+          <span class="eq" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <input type="range" id="music-volume" class="music-volume" min="0" max="100" value="35"
+               aria-label="مستوى صوت الموسيقى" data-en-aria="Music volume">
+      </div>
+
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="تبديل الوضع الفاتح" data-en-aria="Toggle light mode">
+        <span class="theme-icon" aria-hidden="true"></span>
+      </button>
+
+      <button type="button" id="lang-toggle" class="lang-toggle" aria-label="Switch to English">EN</button>
+    </div>
+  </div>
+</nav>
+<audio id="bg-music" src="background-music.mp3" loop preload="none" playsinline></audio>
+
+<main class="wrap" id="main">
 
   <header class="hero">
     <div class="tick-row" aria-hidden="true">
@@ -97,6 +140,8 @@
       <div class="tick"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div>
       <div class="tick"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div>
     </div>
+
+    <img class="hero-logo" src="logo.png" alt="شعار مشعل الدواس" data-en-alt="Meshal Aldawas logo" width="96" height="96" decoding="async" fetchpriority="high">
 
     <span class="role-tag" data-en="Junior Developer · Building My Foundations">مبرمج مبتدئ · في طور البناء</span>
     <h1 data-en="Meshal Aldawas">مشعل الدواس</h1>
@@ -111,10 +156,20 @@
       <div class="coord"><span class="k">STATUS</span><span class="v" data-en="Learning and looking for a first opportunity">أتعلّم وأبحث عن فرصة أولى</span></div>
     </div>
 
-    <a class="cv-download" href="meshal-aldawas-cv.pdf" download>
-      <span data-en="Download CV (PDF)">تحميل السيرة الذاتية (CV)</span>
-      <span class="cv-download-icon" aria-hidden="true">↓</span>
-    </a>
+    <div class="hero-actions">
+      <a class="cv-download" href="meshal-aldawas-cv.pdf" download>
+        <span data-en="Download CV (PDF)">تحميل السيرة الذاتية (CV)</span>
+        <span class="cv-download-icon" aria-hidden="true">↓</span>
+      </a>
+      <a class="ghost-btn" href="#contact" data-en="Contact me">تواصل معي</a>
+    </div>
+
+    <ul class="hero-stats" aria-label="أرقام سريعة" data-en-aria="Quick stats">
+      <li><strong class="mono" id="stat-certs">53</strong><span data-en="Certificates">شهادة تدريبية</span></li>
+      <li><strong class="mono" id="stat-hours">0</strong><span data-en="Training hours">ساعة تدريب</span></li>
+      <li><strong class="mono" id="stat-projects">4</strong><span data-en="Public projects">مشروع منشور</span></li>
+      <li><strong class="mono" id="stat-skills">30</strong><span data-en="Tracked skills">مهارة موثّقة</span></li>
+    </ul>
   </header>
 
   <section id="path">
@@ -137,7 +192,7 @@
       </div>
 
       <div class="tl-item">
-        <span class="tl-year" data-en="2025">2025</span>
+        <span class="tl-year" data-en="2026">2026</span>
         <h3 data-en="Professional &amp; Personal Development">تأهيل مهني وشخصي</h3>
         <p data-en="Courses from the Human Resources Development Fund: CV writing, self-marketing and personal branding, soft skills, and finding your passion.">دورات من صندوق تنمية الموارد البشرية: إعداد السيرة الذاتية، تسويق الذات وبناء الهوية، المهارات الناعمة، وصناعة الشغف.</p>
       </div>
@@ -174,60 +229,67 @@
       <span class="idx">03 / STACK</span>
     </div>
 
+    <p class="skills-legend">
+      <span class="legend-item"><span class="lvl-dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span><span data-en="Comfortable — used in projects">مرتاح — استخدمتها في مشاريع</span></span>
+      <span class="legend-item"><span class="lvl-dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span><span data-en="Practicing — built exercises">أتدرّب — بنيت بها تمارين</span></span>
+      <span class="legend-item"><span class="lvl-dots" aria-hidden="true"><i class="on"></i><i></i><i></i></span><span data-en="Studied — foundations only">درستها — أساسيات</span></span>
+    </p>
+
     <div class="skill-grid">
       <div class="skill-box">
         <h3>LANGUAGES</h3>
         <div class="chip-row">
-          <span class="chip core">JavaScript</span>
-          <span class="chip">Java</span>
-          <span class="chip">C#</span>
-          <span class="chip">Python</span>
-          <span class="chip">C++</span>
-          <span class="chip">PHP</span>
+          <span class="chip core" data-level="3">JavaScript</span>
+          <span class="chip" data-level="2">Java</span>
+          <span class="chip" data-level="1">C#</span>
+          <span class="chip" data-level="1">Python</span>
+          <span class="chip" data-level="1">C++</span>
+          <span class="chip" data-level="1">PHP</span>
         </div>
       </div>
       <div class="skill-box">
         <h3>FRAMEWORKS &amp; TOOLS</h3>
         <div class="chip-row">
-          <span class="chip core">Node.js</span>
-          <span class="chip core">Express</span>
-          <span class="chip">ASP.NET Core</span>
-          <span class="chip">Angular</span>
-          <span class="chip">TypeSpec</span>
-          <span class="chip">ASP.NET Core Identity</span>
-          <span class="chip">Git</span>
-          <span class="chip">GitHub</span>
+          <span class="chip core" data-level="2">Node.js</span>
+          <span class="chip core" data-level="2">Express</span>
+          <span class="chip" data-level="1">ASP.NET Core</span>
+          <span class="chip" data-level="1">Angular</span>
+          <span class="chip" data-level="1">TypeSpec</span>
+          <span class="chip" data-level="1">ASP.NET Core Identity</span>
+          <span class="chip" data-level="3">Git</span>
+          <span class="chip" data-level="3">GitHub</span>
         </div>
       </div>
       <div class="skill-box">
         <h3>WEB &amp; DESIGN</h3>
         <div class="chip-row">
-          <span class="chip">CSS (Grid / Flexbox)</span>
-          <span class="chip" data-en="Responsive Design">تصميم متجاوب (Responsive)</span>
-          <span class="chip" data-en="Accessibility">إمكانية الوصول (Accessibility)</span>
-          <span class="chip">DOM</span>
-          <span class="chip" data-en="API Documentation">توثيق APIs</span>
-          <span class="chip">GraphQL</span>
-          <span class="chip">Adobe Portfolio</span>
+          <span class="chip core" data-level="3">HTML</span>
+          <span class="chip core" data-level="3">CSS (Grid / Flexbox)</span>
+          <span class="chip" data-level="3" data-en="Responsive Design">تصميم متجاوب (Responsive)</span>
+          <span class="chip" data-level="2" data-en="Accessibility">إمكانية الوصول (Accessibility)</span>
+          <span class="chip" data-level="3">DOM</span>
+          <span class="chip" data-level="2" data-en="API Documentation">توثيق APIs</span>
+          <span class="chip" data-level="1">GraphQL</span>
+          <span class="chip" data-level="2">Adobe Portfolio</span>
         </div>
       </div>
       <div class="skill-box">
         <h3>DATA</h3>
         <div class="chip-row">
-          <span class="chip" data-en="Database Design">تصميم قواعد البيانات</span>
-          <span class="chip">Data Analytics</span>
-          <span class="chip">Data Visualization</span>
-          <span class="chip">Excel (VBA / Power Automate)</span>
+          <span class="chip" data-level="2" data-en="Database Design">تصميم قواعد البيانات</span>
+          <span class="chip" data-level="2">Data Analytics</span>
+          <span class="chip" data-level="2">Data Visualization</span>
+          <span class="chip" data-level="2">Excel (VBA / Power Automate)</span>
         </div>
       </div>
       <div class="skill-box">
         <h3>PRACTICE</h3>
         <div class="chip-row">
-          <span class="chip" data-en="Problem Solving">حل المشكلات</span>
-          <span class="chip" data-en="Requirements Gathering">جمع متطلبات العملاء</span>
-          <span class="chip" data-en="Teamwork">العمل ضمن فريق</span>
-          <span class="chip" data-en="Small Project Management">إدارة المشاريع الصغيرة</span>
-          <span class="chip" data-en="Product Management">إدارة المنتجات (Product Management)</span>
+          <span class="chip" data-level="3" data-en="Problem Solving">حل المشكلات</span>
+          <span class="chip" data-level="3" data-en="Requirements Gathering">جمع متطلبات العملاء</span>
+          <span class="chip" data-level="3" data-en="Teamwork">العمل ضمن فريق</span>
+          <span class="chip" data-level="2" data-en="Small Project Management">إدارة المشاريع الصغيرة</span>
+          <span class="chip" data-level="2" data-en="Product Management">إدارة المنتجات (Product Management)</span>
         </div>
       </div>
     </div>
@@ -305,12 +367,44 @@
       <span class="idx">06 / CERTIFICATES</span>
     </div>
 
-    <p class="cert-total" aria-live="polite">
-      <span data-en="Total certificates:">إجمالي الشهادات:</span>
-      <strong class="mono" id="cert-total">53</strong>
-    </p>
+    <div class="cert-stats">
+      <p class="cert-total">
+        <span data-en="Total certificates:">إجمالي الشهادات:</span>
+        <strong class="mono" id="cert-total">53</strong>
+      </p>
+      <p class="cert-total">
+        <span data-en="Total hours:">إجمالي الساعات:</span>
+        <strong class="mono" id="cert-hours">0</strong>
+      </p>
+    </div>
 
-    <button type="button" id="toggle-all-certs" class="toggle-all-btn" data-state="collapsed" data-ar-expand="توسيع الكل" data-ar-collapse="طي الكل" data-en-expand="Expand all" data-en-collapse="Collapse all">توسيع الكل</button>
+    <div class="cert-chart" id="cert-chart" aria-hidden="true"></div>
+
+    <div class="cert-controls">
+      <div class="cert-search">
+        <span class="cert-search-icon mono" aria-hidden="true">⌕</span>
+        <input type="search" id="cert-search" placeholder="ابحث في الشهادات… (/)" data-en-placeholder="Search certificates… (/)"
+               aria-label="ابحث في الشهادات" data-en-aria="Search certificates" autocomplete="off">
+        <button type="button" class="cert-search-clear" id="cert-search-clear" hidden
+                aria-label="مسح البحث" data-en-aria="Clear search">✕</button>
+      </div>
+
+      <label class="cert-sort">
+        <span class="cert-sort-label" data-en="Sort">ترتيب</span>
+        <select id="cert-sort" aria-label="ترتيب الشهادات" data-en-aria="Sort certificates">
+          <option value="date-desc" data-en="Newest first">الأحدث أولاً</option>
+          <option value="date-asc" data-en="Oldest first">الأقدم أولاً</option>
+          <option value="hours-desc" data-en="Longest first">الأطول مدة</option>
+          <option value="title-asc" data-en="A → Z">أبجدياً</option>
+        </select>
+      </label>
+
+      <button type="button" id="toggle-all-certs" class="toggle-all-btn" data-state="collapsed" data-ar-expand="توسيع الكل" data-ar-collapse="طي الكل" data-en-expand="Expand all" data-en-collapse="Collapse all">توسيع الكل</button>
+    </div>
+
+    <div class="cert-filters" id="cert-filters" role="group" aria-label="تصفية حسب المجال" data-en-aria="Filter by category"></div>
+
+    <p class="cert-search-status" id="cert-search-status" role="status" aria-live="polite"></p>
 
     <details class="cert-group" open>
       <summary><span data-en="Web Development">تطوير الويب</span><span class="count mono">25</span></summary>
@@ -957,7 +1051,7 @@
     </div>
   </section>
 
-  <footer id="contact">
+  <section id="contact" class="contact-section">
     <span class="idx">08 / CONTACT</span>
     <h2 class="footer-title" data-en="Looking for my first opportunity in programming">أبحث عن فرصة أولى في البرمجة</h2>
     <p class="footer-lede" data-en="Excited to join a team where I can keep learning and contribute what I know so far. Reach me via:">
@@ -968,10 +1062,16 @@
       <div class="contact-item email">
         <span class="k">EMAIL</span>
         <a class="v" href="mailto:meshaldwas1423@gmail.com">meshaldwas1423@gmail.com</a>
+        <button type="button" class="copy-btn" data-copy="meshaldwas1423@gmail.com"
+                aria-label="نسخ البريد الإلكتروني" data-en-aria="Copy email"
+                data-ar-copy="نسخ" data-ar-done="تم النسخ" data-en-copy="Copy" data-en-done="Copied">نسخ</button>
       </div>
       <div class="contact-item">
         <span class="k">PHONE</span>
         <a class="v mono" href="tel:+966546992912">+966 54 699 2912</a>
+        <button type="button" class="copy-btn" data-copy="+966546992912"
+                aria-label="نسخ رقم الجوال" data-en-aria="Copy phone number"
+                data-ar-copy="نسخ" data-ar-done="تم النسخ" data-en-copy="Copy" data-en-done="Copied">نسخ</button>
       </div>
       <div class="contact-item loc">
         <span class="k">LOCATION</span>
@@ -983,34 +1083,96 @@
       </div>
       <div class="contact-item">
         <span class="k">LINKEDIN</span>
-        <a class="v" href="https://www.linkedin.com/in/مشعل-الدواس-6102771b5/" target="_blank" rel="noopener" data-en="LinkedIn">لينكدإن</a>
+        <a class="v" href="https://www.linkedin.com/in/%D9%85%D8%B4%D8%B9%D9%84-%D8%A7%D9%84%D8%AF%D9%88%D8%A7%D8%B3-6102771b5/" target="_blank" rel="noopener noreferrer" data-en="LinkedIn">لينكدإن</a>
       </div>
     </div>
 
-    <form id="contact-form" class="contact-form" action="https://formspree.io/f/xeaqwybo" method="POST">
+    <form id="contact-form" class="contact-form" action="https://formspree.io/f/xeaqwybo" method="POST" novalidate>
       <div class="form-row">
-        <input type="text" name="name" placeholder="الاسم" data-en-placeholder="Name" required>
-        <input type="email" name="email" placeholder="بريدك الإلكتروني" data-en-placeholder="Your email" required>
+        <div class="field">
+          <input type="text" id="cf-name" name="name" placeholder="الاسم" data-en-placeholder="Name"
+                 required minlength="2" maxlength="80" autocomplete="name"
+                 aria-describedby="cf-name-err">
+          <span class="field-err" id="cf-name-err"></span>
+        </div>
+        <div class="field">
+          <input type="email" id="cf-email" name="email" placeholder="بريدك الإلكتروني" data-en-placeholder="Your email"
+                 required maxlength="120" autocomplete="email" inputmode="email"
+                 aria-describedby="cf-email-err">
+          <span class="field-err" id="cf-email-err"></span>
+        </div>
       </div>
-      <textarea name="message" rows="4" placeholder="رسالتك" data-en-placeholder="Your message" required></textarea>
+
+      <div class="field">
+        <textarea id="cf-message" name="message" rows="4" placeholder="رسالتك" data-en-placeholder="Your message"
+                  required minlength="10" maxlength="1200" aria-describedby="cf-message-err cf-count"></textarea>
+        <span class="field-err" id="cf-message-err"></span>
+        <span class="field-count mono" id="cf-count">0 / 1200</span>
+      </div>
+
+      <!-- مصيدة روبوتات (honeypot): مخفية عن البشر، تملؤها البرامج الآلية غالباً -->
+      <div class="hp-field" aria-hidden="true">
+        <label for="cf-website">اترك هذا الحقل فارغاً</label>
+        <input type="text" id="cf-website" name="_gotcha" tabindex="-1" autocomplete="off">
+      </div>
+
       <button type="submit" class="form-submit">
         <span data-en="Send Message">إرسال الرسالة</span>
       </button>
       <p class="form-status" role="status" aria-live="polite"></p>
+      <p class="form-note" data-en="Your message goes straight to my inbox. No data is stored on this page.">
+        رسالتك تصل مباشرة إلى بريدي. لا تُخزَّن أي بيانات في هذه الصفحة.
+      </p>
     </form>
 
+    <div class="footer-actions">
+      <button type="button" id="share-btn" class="ghost-btn compact" data-en="Share this page">مشاركة الصفحة</button>
+      <button type="button" id="print-btn" class="ghost-btn compact" data-en="Print / Save as PDF">طباعة / حفظ PDF</button>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
     <p class="foot-note">
-      M.ALDAWAS — BUILDING IN PUBLIC — 2026
+      <span>M.ALDAWAS — BUILDING IN PUBLIC — <span id="foot-year">2026</span></span>
+      <span class="foot-built" data-en="Hand-coded: HTML · CSS · JavaScript">مبنية يدوياً: HTML · CSS · JavaScript</span>
       <span class="visit-counter">
         <span data-en="VISITS">زيارات</span>:
-        <img src="https://meshaldwas.goatcounter.com/counter//.svg?no-branding=1" alt="عدد الزيارات" width="18" height="18" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+        <img src="https://meshaldwas.goatcounter.com/counter/%2F.svg?no-branding=1" alt="عدد الزيارات" data-en-alt="Visit count" height="18" loading="lazy" decoding="async" referrerpolicy="no-referrer">
       </span>
     </p>
-  </footer>
+  </div>
+</footer>
 
-</div>
+<button type="button" id="back-to-top" class="back-to-top" aria-label="العودة إلى الأعلى" data-en-aria="Back to top">
+  <span aria-hidden="true">↑</span>
+</button>
 
-<script data-goatcounter="https://meshaldwas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<dialog id="shortcuts-dialog" class="shortcuts-dialog" aria-labelledby="shortcuts-title">
+  <h2 id="shortcuts-title" data-en="Keyboard shortcuts">اختصارات لوحة المفاتيح</h2>
+  <ul class="shortcuts-list">
+    <li><kbd>/</kbd><span data-en="Jump to certificate search">الانتقال إلى بحث الشهادات</span></li>
+    <li><kbd>T</kbd><span data-en="Toggle light / dark mode">تبديل الوضع الفاتح / الداكن</span></li>
+    <li><kbd>L</kbd><span data-en="Switch language (AR / EN)">تبديل اللغة (عربي / إنجليزي)</span></li>
+    <li><kbd>M</kbd><span data-en="Play / pause background music">تشغيل / إيقاف الموسيقى</span></li>
+    <li><kbd>Esc</kbd><span data-en="Close menu or dialog">إغلاق القائمة أو النافذة</span></li>
+    <li><kbd>?</kbd><span data-en="Show this help">عرض هذه المساعدة</span></li>
+  </ul>
+  <button type="button" id="shortcuts-close" class="ghost-btn compact" data-en="Close">إغلاق</button>
+</dialog>
+
+<button type="button" id="shortcuts-btn" class="shortcuts-btn"
+        aria-label="عرض اختصارات لوحة المفاتيح" data-en-aria="Show keyboard shortcuts">
+  <span aria-hidden="true">?</span>
+</button>
+
+<script data-goatcounter="https://meshaldwas.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script src="interactions.js" defer></script>
+<script src="register-sw.js" defer></script>
 </body>
 </html>

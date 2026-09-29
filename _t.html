@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>t</title></head>
+<body><iframe id="f" src="index.html" style="width:1200px;height:900px;border:0"></iframe>
+<script>
+var f=document.getElementById('f');
+function key(d,k,shift){ d.dispatchEvent(new f.contentWindow.KeyboardEvent('keydown',{key:k,shiftKey:!!shift,bubbles:true,cancelable:true})); }
+f.addEventListener('load',function(){
+ setTimeout(function(){
+  var d=f.contentDocument;
+  d.body.focus();
+  console.log('theme start:', d.documentElement.dataset.theme);
+  key(d,'t');
+  setTimeout(function(){
+   console.log('after T:', d.documentElement.dataset.theme);
+   key(d,'l');
+   setTimeout(function(){
+    console.log('after L lang:', d.documentElement.lang);
+    key(d,'?',true);
+    setTimeout(function(){
+     var dlg=d.getElementById('shortcuts-dialog');
+     console.log('dialog open:', dlg.open);
+     console.log('dialog title:', d.getElementById('shortcuts-title').textContent);
+     console.log('kbd count:', d.querySelectorAll('.shortcuts-list kbd').length);
+     key(d,'Escape');
+     setTimeout(function(){
+      console.log('after Esc open:', dlg.open);
+      // restore
+      key(d,'l'); key(d,'t');
+      setTimeout(function(){
+       console.log('restored lang:', d.documentElement.lang, 'theme:', d.documentElement.dataset.theme);
+       console.log('burgerLabel:', d.getElementById('nav-burger').getAttribute('aria-label'));
+       console.log('DONE');
+      },400);
+     },300);
+    },350);
+   },350);
+  },350);
+ },1600);
+});
+</script></body></html>

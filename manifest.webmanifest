@@ -1,0 +1,28 @@
+{
+  "name": "مشعل الدواس — مبرمج مبتدئ",
+  "short_name": "M. الدواس",
+  "description": "ملف مشعل الدواس الشخصي: المسار التعليمي، المهارات التقنية، المشاريع، وأكثر من 50 شهادة تدريبية.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#101c2c",
+  "theme_color": "#101c2c",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
